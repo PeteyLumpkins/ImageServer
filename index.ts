@@ -16,8 +16,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
-// app.use(express.json());
-app.use(express.static('public'));
+app.use(express.json({limit: '5mb'}));
 
 app.get("/", (req, res) => {
     res.sendFile("./index.html");
