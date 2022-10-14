@@ -5,6 +5,8 @@ import path from 'path';
 const app = express();
 const port = '3000';
 
+app.use(express.json({limit: '5mb'}));
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, path.join(__dirname, './public/uploads/'));
@@ -16,10 +18,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
-app.use(express.json({limit: '5mb'}));
-
 app.get("/", (req, res) => {
-    res.sendFile("./index.html");
+    res.sendFile("/index.html");
 })
 
 app.post("/", upload.single("image"), (req, res) => {
